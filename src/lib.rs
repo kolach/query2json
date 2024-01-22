@@ -8,7 +8,7 @@
 //! - `a ~= /^test$/` -> `{"a":{"regexp":"^test$"}}`
 //! - `a > 1 or b < 2` -> `{"or":[{"a":{"gt":1}},{"b":{"lt":2}}]}`
 //! - `(a > 1 or b < 2) and !online` -> `{"and":[{"or":[{"a":{"gt":1}},{"b":{"lt":2}}]},{"online":false}]}`
-//! - `a > 10KB` -> `{"a":{"gt":10240}}`
+//! - `a > 10KB` -> `{"a":{"gt":10000}}`
 //! - `a in '2019-01-01'..'2019-12-31'` -> `{"a":{"between":["2019-01-01","2019-12-31"]}}`
 
 pub mod error;
@@ -23,6 +23,7 @@ pub mod where_filter;
 ///
 /// assert_eq!(query2json("a = 1"), Ok(r#"{"a":1}"#.to_string()));
 /// assert_eq!(query2json("a > 1"), Ok(r#"{"a":{"gt":1}}"#.to_string()));
+/// assert_eq!(query2json("size > 10KB"), Ok(r#"{"size":{"gt":10000}}"#.to_string()));
 /// assert_eq!(query2json("t < 1h"), Ok(r#"{"t":{"lt":3600000}}"#.to_string()));
 /// assert_eq!(query2json("t in 5m..10m"), Ok(r#"{"t":{"between":[300000,600000]}}"#.to_string()));
 /// assert_eq!(query2json("(a > 1 or b < 2) and !online"), Ok(r#"{"and":[{"or":[{"a":{"gt":1}},{"b":{"lt":2}}]},{"online":false}]}"#.to_string()));

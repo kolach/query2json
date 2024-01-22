@@ -10,7 +10,7 @@ Here is a few examples of query text and corresponding JSON filter:
 - `a ~= /^test$/` -> `{"a":{"regexp":"^test$"}}`
 - `a > 1 or b < 2` -> `{"or":[{"a":{"gt":1}},{"b":{"lt":2}}]}`
 - `(a > 1 or b < 2) and !online` -> `{"and":[{"or":[{"a":{"gt":1}},{"b":{"lt":2}}]},{"online":false}]}`
-- `a > 10KB` -> `{"a":{"gt":10240}}`
+- `a > 10KB` -> `{"a":{"gt":10000}}`
 - `a in '2019-01-01'..'2019-12-31'` -> `{"a":{"between":["2019-01-01","2019-12-31"]}}`
 
 License: MIT/Apache-2.0
